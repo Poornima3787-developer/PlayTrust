@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Registration - PlayTrust</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+     <div class="card shadow p-4 mx-auto" style="max-width:500px;">
+       <h2 class="text-center mb-4">PlayTrust Registration Form</h2>
+
+       <!--Role selection-->
+       </div class='mb-3'>
+        <label for="role" class="form-label">Select Role</label>
+        <select id="role" class="form-select" onchange="showForm()">
+          <option value="">--Select--</option>
+          <option value="parent">Parent</option>
+          <option value="coach">Coach</option>
+          <option value="school">School</option>
+        </select>
+     </div>
+
+       <!--Parent form-->
+       <form id="parentForm" class="d-none" onsubmit="registerParent(event)">
+         <div class="mb-3">
+           <label class="form-label">Name</label>
+           <input type="text" id="pname" class="form-control" required>
+         </div>
+          <div class="mb-3">
+           <label class="form-label">Child Name</label>
+           <input type="text" id="childName" class="form-control" required>
+         </div>
+          <div class="mb-3">
+           <label class="form-label">Child Age</label>
+           <input type="text" id="childAge" class="form-control" required>
+         </div>
+          <div class="mb-3">
+           <label class="form-label">Location</label>
+           <input type="text" id="plocation" class="form-control" required>
+         </div>
+          <div class="mb-3">
+           <label class="form-label">Preferred Sports (comma separated)</label>
+           <input type="text" id="sports" class="form-control" required>
+         </div>
+          <button type="submit" class="btn btn-primary w-100">Register Parent</button>
+   </form>
+
+   <!--Coach form-->
+   <form id="coachForm" class="d-none" onsubmit="registerCoach(event)">
+     <div class="mb-3">
+       <label class="form-label">Name</label>
+       <input type="text" id="cname" class="form-control" required>
+     </div>
+     <div class="mb-3">
+       <label class="form-label">Sport</label>
+       <input type="text" id="sport" class="form-control" required>
+     </div>
+     <div class="mb-3">
+       <label class="form-label">Phone Number</label>
+       <input type="text" id="cphoneNumber" class="form-control" required>
+     </div>
+     <div class="mb-3">
+       <label class="form-label">Experience (years)</label>
+       <input type="text" id="experience" class="form-control" required>
+     </div>
+     <div class="mb-3">
+       <label class="form-label">Location</label>
+       <input type="text" id="clocation" class="form-control" required>
+     </div>
+     <div class="mb-3">
+       <label class="form-label">Certifications</label>
+       <input type="text" id="cname" class="form-control" required>
+     </div>
+     <button type="submit" class="btn btn-primary w-100">Register Coach</button>
+   </form>
+
+   <!--School form-->
+   <form id="schoolForm" class="d-none" onsubmit="registerSchool(event)">
+     <div class="mb-3">
+       <label class="form-label">School/Organization Name</label>
+       <input type="text" id="sname" class="form-control" required>
+     </div>
+     <div class="mb-3">
+       <label class="form-label">Address</label>
+       <input type="text" id="address" class="form-control" required>
+     </div>
+     <div class="mb-3">
+       <label class="form-label">Contact Number</label>
+       <input type="text" id="contact" class="form-control" required>
+     </div>
+     <button type="submit" class="btn btn-primary w-100">Register School</button>
+   </form>
+  </div>
+</div>
+  <script src="/register.js"></script>
+  </body>
+</html>

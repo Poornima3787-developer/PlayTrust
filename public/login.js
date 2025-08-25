@@ -7,10 +7,17 @@ async function loginForm(event){
 
   try {
 
-    const res=await axios.post('/user/login',{email,password});
+    const res=await axios.post('/user/login',{email,password},);
     localStorage.setItem('token',res.data.token);
+    const profile=await axios.get('/profile/me',{
+      headers:{Authorization:token}
+    });
+    if(!profile.data.sport && profile.data.role==='coach'){
+      window.location.href='/register';
+    }else{
     alert('login successfully');
     window.location.ref='/dashboard'
+    }
 
   } catch (error) {
     alert("Login failed: " + (error.response?.data?.message || "Server error"));

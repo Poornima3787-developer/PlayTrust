@@ -16,27 +16,11 @@ const userSchema=new mongoose.Schema({
     required:[true,'Please fill the password'],
     minlength:[6,'Password must be at least 6 characters']
   },
-  role:{
-    type:String,
-    enum:['user','coach','admin'],
-    default:'user'
-  },
-  sport:{
-    type:String,
-    default:'other'
-  },
-  isVerified:{
-    type:Boolean,
-    default:false
-  },
-  criminalCheck:{
-    type:Boolean,
-    default:fasle
-  },
-  createdAt:{
-    type:Date,
-    default:Date.now()
-  },
+  role: { 
+    type: String, 
+    enum: ["parent", "coach", "school", "admin"], 
+    required: true 
+  }
 },{timestamps:true});
 
 module.exports=mongoose.model('User',userSchema);

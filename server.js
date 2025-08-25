@@ -11,15 +11,27 @@ app.use(express.json());
 app.use(cors());
 
 const User=require('./models/user');
+const Parent=require('./models/parent');
+const Coach=require('./models/coach');
+const School=require('./models/school');
 
 const userRouter=require('./routes/userRouter');
+const registrationRouter=require('./routes/registrationRouter');
+const adminRouter=require('./routes/admin');
+const profileRouter=require('./routes/profileRouter');
 
 app.use('/user',userRouter);
+app.use('/register',registrationRouter);
+app.use('/admin',adminRouter);
+app.use('/profile',profileRouter);
 
 app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/login',(req,res)=>{
    res.sendFile(path.join(__dirname,'view','login.html'))
+})
+app.get('/signup',(req,res)=>{
+   res.sendFile(path.join(__dirname,'view','signup.html'))
 })
 
 app.get('/',(req,res)=>{

@@ -28,7 +28,7 @@ exports.registerParent=async (req,res)=>{
 
 exports.registerCoach=async (req,res)=>{
   try {
-    const {name,sport,phoneNumber,experience,location,certifications,documents } = req.body;
+    const {name,sport,phoneNumber,experience,location,profilePic,certifications,documents } = req.body;
     const userId=req.user.id;
 
     const existing=await Coach.findOne({userId});
@@ -43,6 +43,7 @@ exports.registerCoach=async (req,res)=>{
       phoneNumber,
       experience,
       location,
+      profilePic,
       certifications,
       documents,
       verificationStatus: "Pending"

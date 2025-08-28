@@ -9,10 +9,10 @@
 <body class="bg-light">
   <div class="container mt-5">
      <div class="card shadow p-4 mx-auto" style="max-width:500px;">
-       <h2 class="text-center mb-4">PlayTrust Registration Form</h2>
+       <h2 class="text-center mb-3">PlayTrust Registration Form</h2>
 
        <!--Role selection-->
-       </div class='mb-3'>
+       <div class='mb-3'>
         <label for="role" class="form-label">Select Role</label>
         <select id="role" class="form-select" onchange="showForm()">
           <option value="">--Select--</option>
@@ -70,8 +70,12 @@
        <input type="text" id="clocation" class="form-control" required>
      </div>
      <div class="mb-3">
+       <label class="form-label">Profile Pic</label>
+       <input type="text" id="profilePic" class="form-control" required>
+     </div>
+     <div class="mb-3">
        <label class="form-label">Certifications</label>
-       <input type="text" id="cname" class="form-control" required>
+       <input type="text" id="certifications" class="form-control" required>
      </div>
      <button type="submit" class="btn btn-primary w-100">Register Coach</button>
    </form>

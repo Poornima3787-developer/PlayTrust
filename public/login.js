@@ -1,22 +1,21 @@
-
 async function loginForm(event){
   event.preventDefault();
-
   const email=event.target.email.value;
   const password=event.target.password.value;
-
   try {
+    const res=await axios.post('/user/login',{email,password});
+    const token=res.data.token;
+    localStorage.setItem('token',token);
 
-    const res=await axios.post('/user/login',{email,password},);
-    localStorage.setItem('token',res.data.token);
     const profile=await axios.get('/profile/me',{
       headers:{Authorization:token}
     });
-    if(!profile.data.sport && profile.data.role==='coach'){
-      window.location.href='/register';
+    
+    if(profile.data.role==='admin'){
+       window.location.href='/admin/dashboard';
+       return;
     }else{
-    alert('login successfully');
-    window.location.ref='/dashboard'
+    window.location.href='/dashboard';
     }
 
   } catch (error) {

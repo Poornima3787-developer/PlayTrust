@@ -8,7 +8,7 @@ async function signupForm(event){
   try {
     const res=await axios.post('/user/signup',{name,email,password});
     alert('Signup successfull! Please Login.');
-    window.location.ref='/login'
+    window.location.href='/register'
 
   } catch (error) {
     alert("Signup failed: " + (error.response?.data?.message || "Server error"));

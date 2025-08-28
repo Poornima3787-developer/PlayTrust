@@ -26,6 +26,10 @@ const coachSchema=new mongoose.Schema({
     type:String,
     required:true
   },
+  profilePic: {
+  type: String,
+  required: true
+},
   certification:String,
   verificationStatus:{
     type:String,

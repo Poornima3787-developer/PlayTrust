@@ -18,7 +18,8 @@ const userSchema=new mongoose.Schema({
   },
   role: { 
     type: String, 
-    enum: ["parent", "coach", "school", "admin"], 
+    enum: ["parent", "coach", "school", "admin"],
+    default:'parent', 
     required: true 
   }
 },{timestamps:true});

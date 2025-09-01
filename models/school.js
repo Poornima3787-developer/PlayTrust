@@ -4,19 +4,20 @@ const schoolSchema=new mongoose.Schema({
   userId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'User',
-    required:true
+    required:true,
+    index:true
   },
   schoolName:{
     type:String,
-    required:true
+    required: [true, "School name is required"],
   },
   address:{
     type:String,
-    required:true
+    required: [true, "Address is required"],
   },
   contactNumber:{
     type:String,
-    required:true
+    required: [true, "Contact number is required"],
   }
 }, { timestamps: true });
 

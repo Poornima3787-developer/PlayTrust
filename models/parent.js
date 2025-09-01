@@ -4,23 +4,24 @@ const parentSchema=new mongoose.Schema({
   userId:{
    type:mongoose.Schema.Types.ObjectId,
    ref:'User',
-   required:true
+   required:true,
+   index:true
   },
   name:{
     type:String,
-    required:true
+    required: [true, "Parent name is required"],
   },
   childName:{
     type:String,
-    required:true
+    required: [true, "Child name is required"],
   },
   childAge:{
     type:Number,
-    required:true
+    required: [true, "Child age is required"],
   },
   location:{
     type:String,
-    required:true,
+    required: [true, "Location is required"],
   },
   preferredSports:[String]
 },{timestamps:true});

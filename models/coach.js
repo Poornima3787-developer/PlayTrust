@@ -4,19 +4,20 @@ const coachSchema=new mongoose.Schema({
   userId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'User',
-    required:true
+    required:true,
+    index:true
   },
   name:{
     type:String,
-    required:true
+    required: [true, "Coach name is required"],
   },
   sport:{
     type:String,
-    required:true
+    required: [true, "Sport is required"],
   },
   phoneNumber:{
     type:String,
-    required:true
+    required: [true, "Phone number is required"],
   },
   experience:{
     type:Number,
@@ -24,19 +25,18 @@ const coachSchema=new mongoose.Schema({
   },
   location:{
     type:String,
-    required:true
+    required: [true, "Location is required"],
   },
   profilePic: {
   type: String,
   required: true
 },
-  certification:String,
+  certifications:[String],
   verificationStatus:{
     type:String,
     enum:["Pending", "Approved", "Rejected"],
     default:'Pending'
   },
-  documents:[String]
 }, { timestamps: true });
 
 module.exports=mongoose.model('Coach',coachSchema);

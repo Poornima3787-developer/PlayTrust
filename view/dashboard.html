@@ -4,107 +4,213 @@
   <meta charset="UTF-8">
   <title>PlayTrust Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 <body class="bg-light">
   <div class="container-fluid">
     <div class="row">
-      <!--sidebar-->
-      <nav class="col-md-2 bg-dark text-white vh-100 p-3">
+      <!-- Sidebar -->
+      <nav class="col-md-2 bg-dark text-white vh-100 d-flex flex-column justify-content-between p-3">
         <h3 class="mb-4">PlayTrust</h3>
-        <ul class="navflex-colum">
-          <li class="nav-item"><a class="nav-link text-white" href="#">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#coaches">Coaches</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#events">Events</a></li>
-        </ul>
-      </nav>
 
-      <!--main content-->
-      <main class="col-md-10 p-4">
-
-        <!--search-->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2>Dashboard</h2>
-          <input id="searchInput" type="text" class="form-control w-25" placeholder="search...">
+        <!-- Profile front-->
+        <div class="text-center mb-2">
+          <img id="userProfilePic" class="rounded-circle mb-2" width="80" height="80" alt="Profile">
+          <h6 id="userName"></h6>
+          <p class="small" id="userRole"></p>
+          <button class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#profileModal"> View Profile </button>
         </div>
 
-        <!--coaches section-->
-        <section id="coaches" class="mb-5">
+        <!-- Sidebar Link -->
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#" id="allEventsLink" data-bs-toggle="modal" data-bs-target="#myeventsModal"> My Events </a>
+          </li>
+        </ul>
+
+        <div class="mt-3">
+          <button class="btn btn-danger w-100" id="logoutBtn">Logout</button>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main class="col-md-10 p-4">
+
+        <!-- Dashboard Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="mb-0">Dashboard</h2>
+          <input id="searchInput" type="text" class="form-control w-25" placeholder="Search...">
+        </div>
+
+        <!-- Coaches Section -->
+        <section id="coaches" class="mb-4">
           <h3>Coaches</h3>
-          <div id="coachesContainer" class="row g-3">
-            <!--will be insert here-->
+          <div class="d-flex align-items-center">
+            <button id="coachPrev" class="btn btn-outline-secondary btn-sm me-2">&lt;</button>
+          <div id="coachesContainer" class="row g-2"></div>
+            <button id="coachNext" class="btn btn-outline-secondary btn-sm ms-2">&gt;</button>
           </div>
         </section>
-<!--event section-->
-    <section id="events">
-      <h3>Events</h3>
-      <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">
-        +Add Event
-      </button>
-      <div id="eventContainer" class="d-flex flex-wrap gap-3">
-        <!--Event card will be inserted here-->
+
+        <!-- Events Section -->
+        <section id="events" class="mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Events</h3>
+            <button class="btn btn-primary btn-sm" id="addEventBtn" data-bs-toggle="modal" data-bs-target="#addEventModal"> + Add Event </button>
+          </div>
+           <div class="d-flex align-items-center">
+              <button id="eventPrev" class="btn btn-outline-secondary btn-sm me-2">&lt;</button>
+           <div id="eventContainer" class="d-flex flex-wrap gap-3"></div>
+               <button id="eventNext" class="btn btn-outline-secondary btn-sm ms-2">&gt;</button>
+            </div>
+        </section>    
+      </main>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-dark text-white">
+          <h5 class="modal-title">Profile Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="profilePicPreview" class="rounded-circle mb-3" width="100" height="100" alt="Profile">
+          <div id="profileDetails"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="editProfileBtn">Edit</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
-      </section>
-      <div class="modal fade" id="addEventModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add Event</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
+    </div>
+  </div>
+
+  <!-- Add Event Modal -->
+  <div class="modal fade" id="addEventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
         <form id="eventForm">
-          <div class="mb-2">
-            <label class="form-label">Event Name</label>
-            <input type="text" name="eventName" class="form-control" required>
+          <div class="modal-header">
+            <h5 class="modal-title">Add Event</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-          <div class="mb-2">
-            <label class="form-label">Date</label>
-            <input type="date" name="date" class="form-control" required>
+          <div class="modal-body">
+            <div class="mb-2">
+              <label class="form-label">Event Name</label>
+              <input type="text" name="eventName" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Date</label>
+              <input type="date" name="date" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Menu</label>
+              <input type="text" name="menu" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Upload Image</label>
+              <input type="file" name="eventImage" class="form-control">
+            </div>
           </div>
-          <div class="mb-2">
-            <label class="form-label">Location</label>
-            <input type="text" name="menu" class="form-control" required>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary w-100">Save</button>
           </div>
-          <div class="mb-2">
-            <label class="form-label">Upload Image</label>
-            <input type="file" name="eventImage" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Save</button>
         </form>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Event Details Modal -->
-<div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Event Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  <!-- Event Details Modal -->
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Event Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="eventDetails"></div>
       </div>
-      <div class="modal-body" id="eventDetails"></div>
+      <div id="eventPagination" class="mt-2"></div>
     </div>
   </div>
-</div>
+
+  <!-- Edit Event Modal -->
+  <div class="modal fade" id="editEventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="editEventForm">
+          <div class="modal-header bg-dark text-white">
+            <h5 class="modal-title">Edit Event</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="editEventId">
+            <div class="mb-2">
+              <label class="form-label">Event Name</label>
+              <input type="text" id="editEventName" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Date</label>
+              <input type="date" id="editEventDate" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Menu</label>
+              <input type="text" id="editEventMenu" class="form-control" required>
+            </div>
+            <div class="mb-2">
+            <label class="form-label">Event Image</label>
+            <input type="file" id="editEventImageInput" name="eventImage" class="form-control" accept="image/*">
+          </div>
+          <div class="text-center mb-2">
+            <img id="editEventPreview" src="" alt="Event Image Preview" style="max-width:100%; max-height:250px; border-radius:6px;">
+          </div>
+        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Coach Details Modal -->
-<div class="modal fade" id="coachModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Coach Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal fade" id="coachModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Coach Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="coachDetails"></div>
       </div>
-      <div class="modal-body" id="coachDetails">
-        <!-- Details will load here -->
-      </div>
+      <div id="pagination" class="mt-2"></div>
     </div>
   </div>
+
+  <!-- My  Events Modal -->
+<div class="modal fade" id="myeventsModal" tabindex="-1" aria-labelledby="eventsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventsModalLabel">My Events</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="myEventsContainer" class="row"></div>
+      </div>
+      <div class="d-flex justify-content-center my-3">
+  <button id="prevMyEvents" class="btn btn-outline-primary me-2">&lt;</button>
+  <button id="nextMyEvents" class="btn btn-outline-primary">&gt;</button>
 </div>
 
+</div>
+</div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/dashboard.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/dashboard.js"></script>
 </html>

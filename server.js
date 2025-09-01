@@ -15,18 +15,21 @@ const User=require('./models/user');
 const Parent=require('./models/parent');
 const Coach=require('./models/coach');
 const School=require('./models/school');
+const ForgotPassword=require('./models/forgotPassword');
 
 const userRouter=require('./routes/userRouter');
 const registrationRouter=require('./routes/registrationRouter');
 const adminRouter=require('./routes/admin');
 const profileRouter=require('./routes/profileRouter');
 const eventRouter=require('./routes/eventRoutes');
+const forgotPasswordRouter=require('./routes/forgotPasswordRoutes');
 
 app.use('/user',userRouter);
 app.use('/register',registrationRouter);
 app.use('/admin',adminRouter);
 app.use('/profile',profileRouter);
 app.use('/event',eventRouter);
+app.use('/password',forgotPasswordRouter);
 
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -44,6 +47,9 @@ app.get('/register',(req,res)=>{
 })
 app.get('/dashboard',(req,res)=>{
    res.sendFile(path.join(__dirname,'view','dashboard.html'))
+})
+app.get('/forgotPassword',(req,res)=>{
+   res.sendFile(path.join(__dirname,'view','forgotPassword.html'))
 })
 
 app.get('/',(req,res)=>{

@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const mongoose=require('mongoose');
 const bcrypt=require('bcrypt');
 const User=require('./models/user');
@@ -14,13 +15,13 @@ async function createAdmin(){
       console.log('Admin already exists');
       process.exit();
     }
-    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD,10);
     const admin=new User({
       name:'Super Admin',
       email:process.env.ADMIN_EMAIL,
       password:hashedPassword,
       role:'admin'
-    })
+    });
     await admin.save();
     process.exit();
   } catch (error) {
@@ -28,4 +29,5 @@ async function createAdmin(){
     process.exit(1);
   }
 }
+
 createAdmin();

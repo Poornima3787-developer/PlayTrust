@@ -6,12 +6,15 @@ async function signupForm(event){
   const password=event.target.password.value;
 
   try {
+
     const res=await axios.post('/user/signup',{name,email,password});
-    alert('Signup successfull! Please Login.');
-    window.location.href='/register'
+    localStorage.setItem('token',res.data.token);
+
+    alert('Signup successfull! Please Register.');
+    window.location.href='/register';
 
   } catch (error) {
-    alert("Signup failed: " + (error.response?.data?.message || "Server error"));
+    alert("Signup failed");
     console.error(error);
   }
 }

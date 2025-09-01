@@ -19,7 +19,7 @@ const userSchema=new mongoose.Schema({
   role: { 
     type: String, 
     enum: ["parent", "coach", "school", "admin"],
-    default:'parent', 
+    default:'coach', 
     required: true 
   }
 },{timestamps:true});

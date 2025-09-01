@@ -3,19 +3,24 @@ const mongoose=require('mongoose');
 const eventSchema=new mongoose.Schema({
   eventName:{
     type:String,
-    required:true
+    required: [true, "Event name is required"],
   },
   date:{
     type:Date,
-    required:true 
+    required: [true, "Event date is required"], 
   },
   menu:{
     type:String,
-    required:true
+    required: [true, "Menu is required"],
   },
   eventImage:{
     type:String,
-    default: "https://cdn-icons-png.flaticon.com/512/833/833314.png" 
+  },
+  createdBy:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required:true,
+    index:true
   }
 },{timestamps:true});
 

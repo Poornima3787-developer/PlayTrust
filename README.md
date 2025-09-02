@@ -2,7 +2,7 @@
 
 ## 🚀 Live Demo
 - **Deployed on AWS EC2 (Nginx + PM2)**
-- 🌐 [Visit Live Project](http://your-domain-or-ec2-public-ip)
+- 🌐 [Visit Live Project](http://15.207.89.22/signup)
 
 ---
 
@@ -55,3 +55,58 @@ PLAYTRUST/
  ├── package.json          # Project metadata & dependencies
  └── README.md             # Documentation
 
+--
+
+Process
+1.Clone the repo
+git clone  → https://github.com/Poornima3787-developer/PlayTrust.git
+cd playtrust
+
+2.Install dependencies
+npm install
+
+3.setup environment variables(nano .env)
+MONGO_URI=your_mongodb_atlas_url
+JWT_SECRET=your_secret_key
+PORT=3000
+EMAIL_API_KEY=your_api_key(it is for reset the password)
+AWS_SECRETKEY(from s3 bucket)
+
+4.Run the app
+npm start
+
+5.Access the app
+http://<ec2-ip-address>/3000
+
+
+---
+
+API END POINTS
+
+🔐 Authentication
+POST   /signup       #signup with JWT
+POST   /register     # User registration(based on category)
+POST   /login        # Login with JWT
+
+👤 Profile
+GET    /profile/             # Get logged-in profile based on the category(coach,parent,school)
+PUT    /profile/update       # Update user profile
+
+🎉 Events
+POST   /events               # Create event (Coach/School/Parent)
+GET    /events?page=1        # Get paginated events
+GET    /events/:id           # Get single event details
+DELETE /events/:id           # Delete event (Admin/Creator only)
+
+⭐ Coches
+GET    /coaches               # Get coaches
+GET    /coches/verificationStatus   # Get based on verification status
+
+👤 Admin
+PUT   /coaches/rejected       # Get status
+PUT   /coches/approved        # Get approved
+
+
+## ✨ Author
+-  **Linkedin** → https://www.linkedin.com/in/poornima-aragala-link/    
+-  **Github** → https://github.com/Poornima3787-developer

@@ -41,6 +41,7 @@ async function loadProfile() {
     document.getElementById("userName").textContent = user.name;
     document.getElementById("userRole").textContent = user.role;
     document.getElementById("userProfilePic").src = getProfileImage(user);
+    document.getElementById("profilePicPreview").src = getProfileImage(user);
 
     renderProfileDetails(user);
 
@@ -66,21 +67,21 @@ function renderProfileDetails(user) {
 
   if (user.role==="coach") {
     detailsHtml += `
-      <p><strong>Sport:</strong> ${user.profile?.sport || ""}</p>
-      <p><strong>Phone Number:</strong>${user.profile?.phoneNumber || ""}</p>
-      <p><strong>Experience:</strong> ${user.profile?.experience || ""} years</p>
-      <p><strong>Location:</strong> ${user.profile?.location || ""}</p>`;
+      <p><strong>Sport:</strong> ${user.profile?.sport || "N/A"}</p>
+      <p><strong>Phone Number:</strong>${user.profile?.phoneNumber || "N/A"}</p>
+      <p><strong>Experience:</strong> ${user.profile?.experience || "N/A"} years</p>
+      <p><strong>Location:</strong> ${user.profile?.location || "N/A"}</p>`;
   } else if(user.role==="parent") {
     detailsHtml += `
-      <p><strong>Child Name:</strong> ${user.profile?.childName || ""}</p>
-      <p><strong>Child Age:</strong> ${user.profile?.childAge || ""}</p>
-      <p><strong>Location:</strong> ${user.profile?.location || ""}</p>
-      <p><strong>Preferred Sports:</strong> ${user.profile?.preferredSports || ""}</p>`;
+      <p><strong>Child Name:</strong> ${user.profile?.childName || "N/A"}</p>
+      <p><strong>Child Age:</strong> ${user.profile?.childAge || "N/A"}</p>
+      <p><strong>Location:</strong> ${user.profile?.location || "N/A"}</p>
+      <p><strong>Preferred Sports:</strong> ${user.profile?.preferredSports || "N/A"}</p>`;
   } else if (user.role==="school") {
     detailsHtml += `
-      <p><strong>School Name:</strong> ${user.profile?.name || ""}</p>
-      <p><strong>Address:</strong> ${user.profile?.address || ""}</p>
-      <p><strong>Contact Number:</strong> ${user.profile?.contactNumber || ""}</p>`;
+      <p><strong>School Name:</strong> ${user.profile?.name || "N/A"}</p>
+      <p><strong>Address:</strong> ${user.profile?.address || "N/A"}</p>
+      <p><strong>Contact Number:</strong> ${user.profile?.contactNumber || "N/A"}</p>`;
   }
   document.getElementById("profileDetails").innerHTML = detailsHtml;
 }
@@ -173,7 +174,6 @@ function renderCoaches(coaches){
           </div>
           <div class="card-footer p-1">
             <button class="btn btn-sm btn-outline-primary view-profile-btn" data-coach='${JSON.stringify(c)}'>View Profile</button>
-          </div>
         </div>`;
     });
 
@@ -211,13 +211,7 @@ document.getElementById("searchInput").addEventListener('input',e=>{
 //Show the coach details in dashboard
 function showCoachDetails(coach) {
   let certHtml = "";
-  if (coach.certifications && coach.certifications.length > 0) {
-    certHtml = "<p><b>Certifications:</b></p><ul>";
-    coach.certifications.forEach(url => {
-      certHtml += `<li><a href="${url}" target="_blank">View Certification</a></li>`;
-    });
-    certHtml += "</ul>";
-  }
+
   document.getElementById("coachDetails").innerHTML = `
     <div class="text-center mb-2">
       <img src="${coach.profilePic || "https://via.placeholder.com/400x200?text=Default+Event"}" style="width:120px; height:120px; border-radius:50%;">
@@ -295,7 +289,7 @@ function showEventDetails(event) {
     </div>
     <p><b>Name:</b> ${event.eventName}</p>
     <p><b>Date:</b> ${new Date(event.date).toLocaleDateString()}</p>
-    <p><b>Menu:</b> ${event.menu}</p>
+    <p><b>Venue:</b> ${event.menu}</p>
     <p><b>Status:</b> ${event.status}</p>
   `;
   new bootstrap.Modal(document.getElementById("eventModal")).show();
@@ -359,7 +353,7 @@ function renderMyEvents() {
           <div class="card-body">
             <h5 class="card-title mb-3">${e.eventName}</h5>
             <p class="mb-2"><b>Date:</b> ${new Date(e.date).toLocaleDateString()}</p>
-            <p class="mb-0"><b>Menu:</b> ${e.menu || ""}</p>
+            <p class="mb-0"><b>Venue:</b> ${e.menu || ""}</p>
           </div>
           <div class="card-footer d-flex justify-content-between">
             <button class="btn btn-sm btn-warning edit-btn" data-event='${JSON.stringify(e)}'>Edit</button>

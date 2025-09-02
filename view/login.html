@@ -4,25 +4,39 @@
   <meta charset="UTF-8">
   <title>PlayTrust Login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      background: url('/images/background.jpg') no-repeat center center/cover;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+    }
+  </style>
 </head>
-<body class="bg-light">
-  <div class="container mt-5">
-    <div class="card shadow p-4 mx-auto" style="max-width:400px;">
-       <h2 class="text-center mb-4">Login to PlayTrust</h2>
+<body class="d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="card shadow-lg glass-card p-4 mx-auto" style="max-width:400px;">
+       <h2 class="text-center mb-4 text-white">Login to PlayTrust</h2>
 
        <form onsubmit="loginForm(event)">
         <div class="mb-3">
-           <label for="email" class="form-label">Email</label>
+           <label for="email" class="form-label text-white">Email</label>
            <input type="email" name="email" class="form-control" placeholder="Enter your Email" required>
         </div>
 
         <div class="mb-3">
-           <label for="password" class="form-label">Password</label>
+           <label for="password" class="form-label text-white">Password</label>
            <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
         </div>
         <button type="submit" class="btn btn-primary w-100">Login</button>
        </form>
-      <p class="mt-3 text-center">Don't have an account? <a href="/signup">Signup</a></p>
+      <p class="mt-3 text-center text-white">Don't have an account? <a href="/signup" class="text-warning">Signup</a></p>
+      <p class="mt-3 text-center"><a href="/forgotPassword" class="text-warning">Forgot password?</a></p>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

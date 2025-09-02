@@ -3,9 +3,17 @@ require('dotenv').config();
 const express=require('express');
 const cors=require('cors');
 const path=require('path');
+const morgan=require('morgan');
+const compression = require("compression");
+const fs = require("fs");
 const connectDB=require('./utils/db-connection');
 
 const app=express();
+app.use(morgan());
+app.use(compression());
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"),{ flags: "a" });
+app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

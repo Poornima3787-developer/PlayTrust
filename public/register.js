@@ -1,5 +1,9 @@
 const token=localStorage.getItem('token');
 
+if(!token){
+  window.location.href="/login";
+}
+
 function showForm(){
   const role=document.getElementById('role').value;
   document.getElementById("parentForm").classList.add("d-none");

@@ -1,11 +1,16 @@
+const token = localStorage.getItem("token");
+
+if (!token) {
+  window.location.replace("/login");
+}else{
 document.addEventListener("DOMContentLoaded", () => {
   loadProfile();
   loadCoaches();
   loadEvents();
   loadMyEvents();
 });
+}
 
-const token = localStorage.getItem("token");
 
 /* LOGOUT*/
 

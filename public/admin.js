@@ -1,4 +1,7 @@
-
+const token = localStorage.getItem("token");
+if (!token) {
+  window.location.href = "/login";
+}
 async function loadCoaches(){
   const token=localStorage.getItem('token');
   try {
@@ -54,3 +57,10 @@ async function rejectCoach(id){
 }
 
 loadCoaches();
+
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.href = "/login";
+});
